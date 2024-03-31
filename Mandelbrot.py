@@ -121,7 +121,6 @@ def mult(c, n):
         result += c
     return result
 
-print("mult(105, 3) should be 315 and is", mult(105, 3))
 
 def update(c, n):
     """Update starts with z = 0 and runs z = z**2 + c
@@ -209,11 +208,11 @@ def scale(pix, pixMax, floatMin, floatMax):
     pos = scale_one * scale_range + floatMin
     return pos
 
-def mset():
+def mset(scalar = 1, x_start = -2, x_end = 1, y_start = -1, y_end = 1):
     """Creates a 300x200 image of the Mandelbrot set.
     """
-    width = 300*5    # We can update the 1 later to enlarge the image...
-    height = 200*5
+    width = 300*scalar    # We can update the 1 later to enlarge the image...
+    height = 200*scalar
     image = PNGImage(width, height)
 
     # Create a loop to draw some pixels
@@ -222,9 +221,9 @@ def mset():
         for row in range(height):
             # Use scale twice:
             #   once to create the real part of c (x)
-            x = scale(col, width, -1.2, -.6)
+            x = scale(col, width, x_start, x_end)
             #   once to create the imaginary part of c (y)
-            y = scale(row, height, -.5, -0.1)
+            y = scale(row, height, y_start, y_end)
             # THEN, create c, choose n, and test:
             c = x + y*1j
             n = 25
